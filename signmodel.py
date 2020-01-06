@@ -14,12 +14,12 @@ while True:
         #Convert the captured frame into RGB
         im = Image.fromarray(frame, 'RGB')
 
-        #Resizing into 128x128 because we trained the model with this image size.
+        #Resizing into 64x64 because we trained the model with this image size.
         im = im.resize((64,64))
         img_array = np.array(im)
 
         #Our keras model used a 4D tensor, (images x height x width x channel)
-        #So changing dimension 128x128x3 into 1x128x128x3 
+        #So changing dimension 64x64x3 into 1x128x128x3 
         img_array = np.expand_dims(img_array, axis=0)
         img_array =img_array/255.0
         #Calling the predict method on model to predict 'me' on the image
@@ -27,9 +27,8 @@ while True:
         maxelement=max(finalarray.ravel())
         prediction = np.where(finalarray.ravel()==maxelement)[0][0]
 
-        #if prediction is 0, which means I am missing on the image, then show the frame in gray color.
+        #Prediction 0 to 5 displays the hand sign which is recognised.
         if prediction == 0:
-                frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
                 print("0")
         if prediction==1:
                 print("1")
