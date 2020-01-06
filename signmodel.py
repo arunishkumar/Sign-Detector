@@ -19,7 +19,7 @@ while True:
         img_array = np.array(im)
 
         #Our keras model used a 4D tensor, (images x height x width x channel)
-        #So changing dimension 64x64x3 into 1x128x128x3 
+        #So changing dimension 64x64x3 into 1x64x64x3 
         img_array = np.expand_dims(img_array, axis=0)
         img_array =img_array/255.0
         #Calling the predict method on model to predict 'me' on the image
